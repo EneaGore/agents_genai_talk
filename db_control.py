@@ -11,8 +11,8 @@ class ScoreDatabase:
             create_table = """
             CREATE TABLE IF NOT EXISTS scores (
                 id INTEGER PRIMARY KEY,
-                submissionId INTEGER NOT NULL,
-                submission TEXT NOT NULL,
+                submissionText TEXT,
+                feedback TEXT,
                 score INT
             );
             """
@@ -28,13 +28,13 @@ class ScoreDatabase:
             records = cursor.fetchall()
             return records 
 
-    def insert_score(self, submissionId, submission, score):
+    def insert_score(self, submissionText, feedback, score):
         """Inserts a new record into the scores table."""
         with sqlite3.connect(self.db_name) as conn:
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO scores (submissionId, submission, score) VALUES (?, ?, ?)",
-                (submissionId, submission, score)
+                "INSERT INTO scores (submissionText, feedback, score) VALUES (?, ?, ?)",
+                (submissionText, feedback, score)
             )
             conn.commit()
             

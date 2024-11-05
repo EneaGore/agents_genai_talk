@@ -7,11 +7,7 @@ model = ChatOpenAI(model="gpt-4o-mini")
 
 @tool
 def multiply_all(*args):
-    """_summary_ : Multiplies all the arguments together.
-
-    Returns:
-        _type_: _description_
-    """
+    """Multiplies all the arguments together."""
     return reduce(lambda x, y: x * y, args, 1)
 tools = [multiply_all]
 # what is 54895 * 84865 
@@ -27,5 +23,13 @@ st.divider()
 llm_with_tools = model.bind_tools(tools)
 response2 = model.invoke("what is 54895 * 84865")
 llm_with_tools.invoke("what is 54895 * 84865")
+
+code = """ 
+@tool
+def multiply_all(*args):
+    "Multiplies all the arguments together."
+    return reduce(lambda x, y: x * y, args, 1)
+llm_with_tools = model.bind_tools(tools)
+"""
 st.write("Function Calling")
 st.write(response2.content)

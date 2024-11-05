@@ -1,5 +1,5 @@
 import streamlit as st
-from agents import NewAgent
+from agents import TutorAgent
 st.set_page_config(
     page_title="Cool Stuff",
     page_icon=":llama:",
@@ -29,7 +29,7 @@ If the user asks for page numbers use the correct format for the page number wit
 """
 
 if 'agent' not in st.session_state:
-    st.session_state.agent = NewAgent()
+    st.session_state.agent = TutorAgent()
     st.session_state.history = []
     
     
